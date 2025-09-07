@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>AR Saída</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --primary: #00ffff;
+      --bg-dark: #1e2a38;
+      --bg-light: #f9f9f9;
+      --text-dark: #fff;
+      --text-light: #111;
+      --card-dark: #2e3f56;
+      --card-light: #fff;
+      --danger: #ff4d4d;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+    }
+
+    body.light {
+      background: linear-gradient(to right, #e4e9f0, #f4f4f4);
+      color: var(--text-light);
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 30px auto;
+      background: var(--bg-dark);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      transition: 0.3s;
+    }
+
+    body.light .container {
+      background: var(--card-light);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="search"],
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: #00cfcf;
+    }
+
+    .danger {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .actions button {
+      flex: 1;
+      min-width: 48%;
+    }
+
+    .lista {
+      margin-top: 25px;
+    }
+
+    .dia {
+      background: var(--card-dark);
+      margin-bottom: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      animation: fadeIn 0.5s ease;
+    }
+
+    body.light .dia {
+      background: var(--bg-light);
+    }
+
+    .dia:hover {
+      background: #3c506c;
+    }
+
+    body.light .dia:hover {
+      background: #ddd;
+    }
+
+    .carros {
+      margin-top: 10px;
+      margin-left: 20px;
+      font-size: 15px;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .carro-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      animation: slideIn 0.4s ease;
+    }
+
+    .carro-item button {
+      margin: 0 4px;
+      padding: 4px 8px;
+      font-size: 13px;
+      border-radius: 6px;
+    }
+
+    .contador {
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: #000;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes slideIn {
+      from {transform: translateX(-20px); opacity: 0;}
+      to {transform: translateX(0); opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()">🌗 Tema</button>
+  <div class="container">
+    <h1>AR Saída</h1>
+
+    <label for="carro">Carro:</label>
+    <input type="text" id="carro" placeholder="Ex: Fiat Mobi">
+
+    <label for="placa">Placa:</label>
+    <input type="text" id="placa" placeholder="Ex: ABC-1234">
+
+    <label for="data">Data da saída:</label>
+    <input type="date" id="data">
+
+    <button onclick="registrarSaida()">Registrar Saída</button>
+
+    <label for="busca">🔍 Buscar saída:</label>
+    <input type="search" id="busca" placeholder="Digite carro ou placa..." oninput="mostrarLista()">
+
+    <label for="filtro">📅 Filtro de período:</label>
+    <select id="filtro" onchange="mostrarLista()">
+      <option value="tudo">Tudo</option>
+      <option value="semana">Última semana</option>
+      <option value="mes">Último mês</option>
+    </select>
+
+    <div class="actions">
+      <button onclick="gerarBackup()">💾 Backup JSON</button>
+      <input type="file" id="inputBackup" accept=".json" style="display:none" onchange="restaurarBackup(event)">
+      <button onclick="document.getElementById('inputBackup').click()">🔁 Restaurar Backup</button>
+      <button onclick="exportarExcel()">📊 Gerar Excel</button>
+      <button class="danger" onclick="limparTudo()">🧹 Limpar Tudo</button>
+    </div>
+
+    <div class="contador" id="contador"></div>
+    <div class="lista" id="lista"></div>
+
+    <footer>Desenvolvido por ©Arinaldo Sousa</footer>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script>
+    function toast(msg) {
+      const t = document.getElementById("toast");
+      t.innerText = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 3000);
+    }
+
+    function getChaveMesAtual() {
+      const hoje = new Date();
+      return `saidas-${hoje.getFullYear()}-${(hoje.getMonth()+1).toString().padStart(2,"0")}`;
+    }
+
+    function carregarDados() {
+      const chave = getChaveMesAtual();
+      const dados = localStorage.getItem(chave);
+      return dados ? JSON.parse(dados) : [];
+    }
+
+    function salvarDados(dados) {
+      const chave = getChaveMesAtual();
+      localStorage.setItem(chave, JSON.stringify(dados));
+    }
+
+    function registrarSaida() {
+      const carro = document.getElementById('carro').value.trim();
+      const placa = document.getElementById('placa').value.trim();
+      const data = document.getElementById('data').value;
+
+      if (!carro || !placa || !data) {
+        toast("⚠️ Preencha todos os campos.");
+        return;
+      }
+
+      const dados = carregarDados();
+      dados.push({ id: Date.now(), carro, placa, data });
+      salvarDados(dados);
+
+      document.getElementById('carro').value = '';
+      document.getElementById('placa').value = '';
+      document.getElementById('data').value = '';
+
+      toast("✅ Saída registrada!");
+      mostrarLista();
+    }
+
+    function editarRegistro(id) {
+      const dados = carregarDados();
+      const r = dados.find(x => x.id === id);
+      if (!r) return;
+
+      document.getElementById('carro').value = r.carro;
+      document.getElementById('placa').value = r.placa;
+      document.getElementById('data').value = r.data;
+      excluirRegistro(id);
+    }
+
+    function excluirRegistro(id) {
+      let dados = carregarDados();
+      dados = dados.filter(r => r.id !== id);
+      salvarDados(dados);
+      toast("🗑️ Registro removido.");
+      mostrarLista();
+    }
+
+    function limparTudo() {
+      if(confirm("⚠️ Deseja realmente apagar todos os registros deste mês?")) {
+        salvarDados([]);
+        mostrarLista();
+        toast("🧹 Todos os registros foram apagados!");
+      }
+    }
+
+    function mostrarLista() {
+      const dados = carregarDados();
+      const busca = document.getElementById('busca').value.toLowerCase();
+      const filtro = document.getElementById('filtro').value;
+      const porDia = {};
+      const hoje = new Date();
+
+      dados.filter(d => {
+        if (!(d.carro.toLowerCase().includes(busca) || d.placa.toLowerCase().includes(busca))) return false;
+        const data = new Date(d.data);
+        if (filtro === "semana" && (hoje - data) > 7*86400000) return false;
+        if (filtro === "mes" && (hoje - data) > 30*86400000) return false;
+        return true;
+      }).forEach(item => {
+        if (!porDia[item.data]) porDia[item.data] = [];
+        porDia[item.data].push(item);
+      });
+
+      const lista = document.getElementById('lista');
+      lista.innerHTML = '';
+
+      let total = 0;
+      Object.keys(porDia).sort().forEach(dia => {
+        const item = document.createElement('div');
+        item.className = 'dia';
+        item.innerHTML = `<strong>${formatarData(dia)}</strong> — ${porDia[dia].length} saída(s)`;
+        const carros = document.createElement('div');
+        carros.className = 'carros';
+
+        porDia[dia].forEach(c => {
+          const carroItem = document.createElement('div');
+          carroItem.className = 'carro-item';
+          carroItem.innerHTML = `• ${c.carro} — ${c.placa}`;
+          const botoes = document.createElement('div');
+          botoes.innerHTML = `
+            <button onclick="editarRegistro(${c.id})">✏️ Editar</button>
+            <button onclick="excluirRegistro(${c.id})">🗑️ Excluir</button>
+          `;
+          carroItem.appendChild(botoes);
+          carros.appendChild(carroItem);
+        });
+
+        item.appendChild(carros);
+        item.addEventListener('click', () => {
+          carros.style.display = carros.style.display === 'none' ? 'block' : 'none';
+        });
+
+        lista.appendChild(item);
+        total += porDia[dia].length;
+      });
+
+      document.getElementById('contador').innerText = `🚗 Total de saídas: ${total}`;
+    }
+
+    function gerarBackup() {
+      const dados = carregarDados();
+      const blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${getChaveMesAtual()}.json`;
+      a.click();
+      toast("💾 Backup gerado!");
+    }
+
+    function restaurarBackup(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        try {
+          const dados = JSON.parse(e.target.result);
+          salvarDados(dados);
+          toast("✅ Backup restaurado!");
+          mostrarLista();
+        } catch {
+          toast("❌ Erro ao restaurar backup.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function exportarExcel() {
+      const dados = carregarDados();
+      if (!dados.length) return toast("Nenhuma saída registrada.");
+
+      const wsData = [["Carro", "Placa", "Data"]];
+      dados.forEach(d => wsData.push([d.carro, d.placa, d.data]));
+
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Saídas");
+
+      XLSX.writeFile(wb, `${getChaveMesAtual()}.xlsx`);
+      toast("📊 Excel exportado!");
+    }
+
+    function formatarData(dataISO) {
+      const [ano, mes, dia] = dataISO.split("-");
+      return `${dia}/${mes}/${ano}`;
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+    }
+
+    mostrarLista();
+  </script>
+</body>
+</html>
