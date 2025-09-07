@@ -15,222 +15,154 @@
       --card-light: #fff;
       --danger: #ff4d4d;
     }
-
     body {
       font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background: linear-gradient(to right, #141e30, #243b55);
       color: var(--text-dark);
-      transition: all 0.3s ease;
     }
 
-    body.light {
-      background: linear-gradient(to right, #e4e9f0, #f4f4f4);
-      color: var(--text-light);
+    /* Tela de Login */
+    #loginScreen {
+      position: fixed; top:0; left:0;
+      width:100%; height:100%;
+      background: linear-gradient(to right,#0f2027,#203a43,#2c5364);
+      display:flex; justify-content:center; align-items:center;
+      z-index:9999;
     }
-
-    .container {
-      max-width: 950px;
-      margin: 30px auto;
-      background: var(--bg-dark);
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-      transition: 0.3s;
-    }
-
-    body.light .container {
-      background: var(--card-light);
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: var(--primary);
-    }
-
-    label {
-      display: block;
-      margin-top: 12px;
-      font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="date"],
-    input[type="search"],
-    select {
-      width: 100%;
-      padding: 12px;
-      margin-top: 5px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      outline: none;
-    }
-
-    button {
-      margin-top: 15px;
-      padding: 12px;
-      background: var(--primary);
-      color: #000;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      background: #00cfcf;
-    }
-
-    .danger {
-      background: var(--danger);
-      color: #fff;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .actions button {
-      flex: 1;
-      min-width: 48%;
-    }
-
-    .lista {
-      margin-top: 25px;
-    }
-
-    .dia {
+    #loginBox {
       background: var(--card-dark);
-      margin-bottom: 12px;
-      padding: 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-      animation: fadeIn 0.5s ease;
+      padding: 30px; border-radius: 16px;
+      width: 320px; text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
     }
+    #loginBox h2 { color: var(--primary); }
+    #loginBox input {
+      width: 100%; padding: 12px; margin: 10px 0;
+      border: none; border-radius: 8px;
+    }
+    #loginBox button {
+      width: 100%; padding: 12px; margin-top: 10px;
+      border: none; border-radius: 8px;
+      font-weight: bold; cursor: pointer;
+      background: var(--primary); color: #000;
+    }
+    #loginBox button:hover { background: #00cfcf; }
 
-    body.light .dia {
-      background: var(--bg-light);
+    /* Alterar Senha */
+    #alterarSenhaScreen {
+      position: fixed; top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.85);
+      display:none; justify-content:center; align-items:center;
+      z-index:10000;
     }
+    #alterarSenhaBox {
+      background: var(--card-dark);
+      padding: 25px; border-radius: 14px;
+      width: 300px; text-align: center;
+    }
+    #alterarSenhaBox h3 { color: var(--primary); }
+    #alterarSenhaBox input {
+      width:100%; padding:10px; margin:8px 0;
+      border:none; border-radius:8px;
+    }
+    #alterarSenhaBox button {
+      width:100%; padding:10px; margin-top:8px;
+      border:none; border-radius:8px;
+      background: var(--primary); color:#000;
+      font-weight:bold; cursor:pointer;
+    }
+    #alterarSenhaBox button:hover { background:#00cfcf; }
 
-    .dia:hover {
-      background: #3c506c;
+    /* Sistema */
+    .container {
+      max-width: 950px; margin: 30px auto;
+      background: var(--bg-dark); padding: 30px;
+      border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     }
+    h1 { text-align:center; margin-bottom:20px; color: var(--primary); }
+    label { display:block; margin-top:12px; font-weight:bold; }
+    input[type="text"],input[type="date"],input[type="search"],select {
+      width:100%; padding:12px; margin-top:5px;
+      border:none; border-radius:10px; font-size:16px;
+    }
+    button {
+      margin-top:15px; padding:12px;
+      background: var(--primary); color:#000;
+      border:none; border-radius:10px;
+      font-size:16px; font-weight:bold; cursor:pointer;
+    }
+    button:hover { transform:scale(1.05); background:#00cfcf; }
+    .danger { background: var(--danger); color:#fff; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+    .actions button { flex:1; min-width:48%; }
 
-    body.light .dia:hover {
-      background: #ddd;
+    .lista { margin-top:25px; }
+    .dia {
+      background: var(--card-dark); margin-bottom:12px;
+      padding:12px; border-radius:10px; cursor:pointer;
     }
+    .carros { margin-top:10px; margin-left:20px; font-size:15px; display:none; }
+    .carro-item { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.1); }
+    .contador { margin-top:20px; font-size:15px; font-weight:bold; text-align:center; }
+    footer { margin-top:30px; text-align:center; font-size:13px; color:#aaa; }
 
-    .carros {
-      margin-top: 10px;
-      margin-left: 20px;
-      font-size: 15px;
-      line-height: 1.6;
-      display: none;
+    .theme-toggle, .logout-btn {
+      position:absolute; top:15px; right:15px;
+      background:transparent; border:2px solid var(--primary);
+      color:var(--primary); padding:6px 12px;
+      border-radius:8px; cursor:pointer;
     }
-
-    .carro-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      animation: slideIn 0.4s ease;
-    }
-
-    .carro-item button {
-      margin: 0 4px;
-      padding: 4px 8px;
-      font-size: 13px;
-      border-radius: 6px;
-    }
-
-    .contador {
-      margin-top: 20px;
-      font-size: 15px;
-      font-weight: bold;
-      text-align: center;
-    }
-
-    footer {
-      margin-top: 30px;
-      text-align: center;
-      font-size: 13px;
-      color: #aaa;
-    }
-
-    .theme-toggle {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: transparent;
-      border: 2px solid var(--primary);
-      color: var(--primary);
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+    .logout-btn { right:100px; }
 
     .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--primary);
-      color: #000;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.5s;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    @keyframes slideIn {
-      from {transform: translateX(-20px); opacity: 0;}
-      to {transform: translateX(0); opacity: 1;}
+      position:fixed; bottom:20px; right:20px;
+      background: var(--primary); color:#000;
+      padding:12px 20px; border-radius:10px;
+      font-weight:bold; display:none;
     }
   </style>
 </head>
 <body>
+  <!-- 🔒 Tela Login -->
+  <div id="loginScreen">
+    <div id="loginBox">
+      <h2>🔒 Login</h2>
+      <input type="password" id="senhaInput" placeholder="Digite sua senha">
+      <button onclick="fazerLogin()">Entrar</button>
+      <button onclick="abrirAlterarSenha()">Alterar Senha</button>
+    </div>
+  </div>
+
+  <!-- Alterar Senha -->
+  <div id="alterarSenhaScreen">
+    <div id="alterarSenhaBox">
+      <h3>Alterar Senha</h3>
+      <input type="password" id="senhaAtual" placeholder="Senha atual">
+      <input type="password" id="novaSenha" placeholder="Nova senha">
+      <input type="password" id="confirmaSenha" placeholder="Confirmar nova senha">
+      <button onclick="salvarNovaSenha()">Salvar</button>
+      <button onclick="fecharAlterarSenha()">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Sistema -->
   <button class="theme-toggle" onclick="toggleTheme()">🌗 Tema</button>
-  <div class="container">
+  <button class="logout-btn" onclick="logout()">🚪 Sair</button>
+  <div class="container" id="sistema" style="display:none">
     <h1>AR Saída</h1>
 
     <label for="carro">Carro:</label>
     <input type="text" id="carro" placeholder="Ex: Fiat Mobi">
-
     <label for="placa">Placa:</label>
     <input type="text" id="placa" placeholder="Ex: ABC-1234">
-
     <label for="data">Data da saída:</label>
     <input type="date" id="data">
-
     <button onclick="registrarSaida()">Registrar Saída</button>
 
     <label for="busca">🔍 Buscar saída:</label>
     <input type="search" id="busca" placeholder="Digite carro ou placa..." oninput="mostrarLista()">
-
     <label for="filtro">📅 Filtro de período:</label>
     <select id="filtro" onchange="mostrarLista()">
       <option value="tudo">Tudo</option>
@@ -248,192 +180,134 @@
 
     <div class="contador" id="contador"></div>
     <div class="lista" id="lista"></div>
-
     <footer>Desenvolvido por ©Arinaldo Sousa</footer>
   </div>
 
   <div id="toast" class="toast"></div>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script>
-    function toast(msg) {
-      const t = document.getElementById("toast");
-      t.innerText = msg;
-      t.classList.add("show");
-      setTimeout(() => t.classList.remove("show"), 3000);
+    /* Funções Login */
+    async function hash(text) {
+      const msgUint8 = new TextEncoder().encode(text);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b=>b.toString(16).padStart(2,"0")).join("");
+    }
+    async function fazerLogin() {
+      const senha = document.getElementById("senhaInput").value;
+      const senhaHash = await hash(senha);
+      const senhaSalva = localStorage.getItem("senhaHash") || await hash("1234");
+      if (senhaHash === senhaSalva) {
+        document.getElementById("loginScreen").style.display="none";
+        document.getElementById("sistema").style.display="block";
+        mostrarLista();
+        toast("✅ Login realizado!");
+      } else toast("❌ Senha incorreta!");
+    }
+    function logout() {
+      document.getElementById("loginScreen").style.display="flex";
+      document.getElementById("sistema").style.display="none";
+      document.getElementById("senhaInput").value="";
+    }
+    function abrirAlterarSenha(){document.getElementById("alterarSenhaScreen").style.display="flex";}
+    function fecharAlterarSenha(){document.getElementById("alterarSenhaScreen").style.display="none";}
+    async function salvarNovaSenha(){
+      const atual=document.getElementById("senhaAtual").value;
+      const nova=document.getElementById("novaSenha").value;
+      const conf=document.getElementById("confirmaSenha").value;
+      if(!nova||nova!==conf){toast("⚠️ Senha nova não confere.");return;}
+      const hashAtual=await hash(atual);
+      const senhaSalva=localStorage.getItem("senhaHash")||await hash("1234");
+      if(hashAtual!==senhaSalva){toast("❌ Senha atual incorreta.");return;}
+      localStorage.setItem("senhaHash",await hash(nova));
+      toast("✅ Senha alterada!"); fecharAlterarSenha();
     }
 
-    function getChaveMesAtual() {
-      const hoje = new Date();
+    /* Funções Sistema */
+    function getChaveMesAtual(){
+      const hoje=new Date();
       return `saidas-${hoje.getFullYear()}-${(hoje.getMonth()+1).toString().padStart(2,"0")}`;
     }
-
-    function carregarDados() {
-      const chave = getChaveMesAtual();
-      const dados = localStorage.getItem(chave);
-      return dados ? JSON.parse(dados) : [];
+    function carregarDados(){
+      const chave=getChaveMesAtual();
+      const dados=localStorage.getItem(chave);
+      return dados?JSON.parse(dados):[];
     }
-
-    function salvarDados(dados) {
-      const chave = getChaveMesAtual();
-      localStorage.setItem(chave, JSON.stringify(dados));
+    function salvarDados(dados){
+      const chave=getChaveMesAtual();
+      localStorage.setItem(chave,JSON.stringify(dados));
     }
-
-    function registrarSaida() {
-      const carro = document.getElementById('carro').value.trim();
-      const placa = document.getElementById('placa').value.trim();
-      const data = document.getElementById('data').value;
-
-      if (!carro || !placa || !data) {
-        toast("⚠️ Preencha todos os campos.");
-        return;
-      }
-
-      const dados = carregarDados();
-      dados.push({ id: Date.now(), carro, placa, data });
+    function registrarSaida(){
+      const carro=document.getElementById('carro').value.trim();
+      const placa=document.getElementById('placa').value.trim();
+      const data=document.getElementById('data').value;
+      if(!carro||!placa||!data){toast("⚠️ Preencha todos os campos.");return;}
+      const dados=carregarDados();
+      dados.push({id:Date.now(),carro,placa,data});
       salvarDados(dados);
-
-      document.getElementById('carro').value = '';
-      document.getElementById('placa').value = '';
-      document.getElementById('data').value = '';
-
-      toast("✅ Saída registrada!");
-      mostrarLista();
+      document.getElementById('carro').value='';document.getElementById('placa').value='';document.getElementById('data').value='';
+      toast("✅ Saída registrada!"); mostrarLista();
     }
-
-    function editarRegistro(id) {
-      const dados = carregarDados();
-      const r = dados.find(x => x.id === id);
-      if (!r) return;
-
-      document.getElementById('carro').value = r.carro;
-      document.getElementById('placa').value = r.placa;
-      document.getElementById('data').value = r.data;
-      excluirRegistro(id);
-    }
-
-    function excluirRegistro(id) {
-      let dados = carregarDados();
-      dados = dados.filter(r => r.id !== id);
-      salvarDados(dados);
-      toast("🗑️ Registro removido.");
-      mostrarLista();
-    }
-
-    function limparTudo() {
-      if(confirm("⚠️ Deseja realmente apagar todos os registros deste mês?")) {
-        salvarDados([]);
-        mostrarLista();
-        toast("🧹 Todos os registros foram apagados!");
-      }
-    }
-
-    function mostrarLista() {
-      const dados = carregarDados();
-      const busca = document.getElementById('busca').value.toLowerCase();
-      const filtro = document.getElementById('filtro').value;
-      const porDia = {};
-      const hoje = new Date();
-
-      dados.filter(d => {
-        if (!(d.carro.toLowerCase().includes(busca) || d.placa.toLowerCase().includes(busca))) return false;
-        const data = new Date(d.data);
-        if (filtro === "semana" && (hoje - data) > 7*86400000) return false;
-        if (filtro === "mes" && (hoje - data) > 30*86400000) return false;
+    function excluirRegistro(id){let dados=carregarDados();dados=dados.filter(r=>r.id!==id);salvarDados(dados);toast("🗑️ Registro removido.");mostrarLista();}
+    function limparTudo(){if(confirm("⚠️ Apagar todos os registros deste mês?")){salvarDados([]);mostrarLista();toast("🧹 Registros apagados!");}}
+    function mostrarLista(){
+      const dados=carregarDados();
+      const busca=document.getElementById('busca').value?.toLowerCase()||"";
+      const filtro=document.getElementById('filtro').value;
+      const porDia={}; const hoje=new Date();
+      dados.filter(d=>{
+        if(!(d.carro.toLowerCase().includes(busca)||d.placa.toLowerCase().includes(busca)))return false;
+        const data=new Date(d.data);
+        if(filtro==="semana"&&(hoje-data)>7*86400000)return false;
+        if(filtro==="mes"&&(hoje-data)>30*86400000)return false;
         return true;
-      }).forEach(item => {
-        if (!porDia[item.data]) porDia[item.data] = [];
-        porDia[item.data].push(item);
-      });
-
-      const lista = document.getElementById('lista');
-      lista.innerHTML = '';
-
-      let total = 0;
-      Object.keys(porDia).sort().forEach(dia => {
-        const item = document.createElement('div');
-        item.className = 'dia';
-        item.innerHTML = `<strong>${formatarData(dia)}</strong> — ${porDia[dia].length} saída(s)`;
-        const carros = document.createElement('div');
-        carros.className = 'carros';
-
-        porDia[dia].forEach(c => {
-          const carroItem = document.createElement('div');
-          carroItem.className = 'carro-item';
-          carroItem.innerHTML = `• ${c.carro} — ${c.placa}`;
-          const botoes = document.createElement('div');
-          botoes.innerHTML = `
-            <button onclick="editarRegistro(${c.id})">✏️ Editar</button>
-            <button onclick="excluirRegistro(${c.id})">🗑️ Excluir</button>
-          `;
-          carroItem.appendChild(botoes);
+      }).forEach(item=>{if(!porDia[item.data])porDia[item.data]=[];porDia[item.data].push(item);});
+      const lista=document.getElementById('lista');lista.innerHTML='';
+      let total=0;
+      Object.keys(porDia).sort().forEach(dia=>{
+        const item=document.createElement('div');item.className='dia';
+        item.innerHTML=`<strong>${formatarData(dia)}</strong> — ${porDia[dia].length} saída(s)`;
+        const carros=document.createElement('div');carros.className='carros';
+        porDia[dia].forEach(c=>{
+          const carroItem=document.createElement('div');carroItem.className='carro-item';
+          carroItem.innerHTML=`• ${c.carro} — ${c.placa} <button onclick="excluirRegistro(${c.id})">🗑️ Excluir</button>`;
           carros.appendChild(carroItem);
         });
-
-        item.appendChild(carros);
-        item.addEventListener('click', () => {
-          carros.style.display = carros.style.display === 'none' ? 'block' : 'none';
-        });
-
-        lista.appendChild(item);
-        total += porDia[dia].length;
+        item.appendChild(carros);item.addEventListener('click',()=>{carros.style.display=carros.style.display==='none'?'block':'none';});
+        lista.appendChild(item);total+=porDia[dia].length;
       });
-
-      document.getElementById('contador').innerText = `🚗 Total de saídas: ${total}`;
+      document.getElementById('contador').innerText=`🚗 Total de saídas: ${total}`;
+      mostrarResumoMensal();
     }
-
-    function gerarBackup() {
-      const dados = carregarDados();
-      const blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `${getChaveMesAtual()}.json`;
-      a.click();
-      toast("💾 Backup gerado!");
-    }
-
-    function restaurarBackup(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = e => {
-        try {
-          const dados = JSON.parse(e.target.result);
-          salvarDados(dados);
-          toast("✅ Backup restaurado!");
-          mostrarLista();
-        } catch {
-          toast("❌ Erro ao restaurar backup.");
+    function mostrarResumoMensal(){
+      const dados=carregarDados();const porMes={};
+      dados.forEach(d=>{
+        const data=new Date(d.data);
+        if(!isNaN(data)){
+          const chave=`${data.getFullYear()}-${(data.getMonth()+1).toString().padStart(2,"0")}`;
+          porMes[chave]=(porMes[chave]||0)+1;
         }
-      };
-      reader.readAsText(file);
+      });
+      if(Object.keys(porMes).length){
+        const resumo=document.createElement('div');resumo.className='dia';
+        resumo.innerHTML="<strong>📅 Saídas por mês</strong>";
+        const detalhe=document.createElement('div');detalhe.className='carros';detalhe.style.display="block";
+        Object.keys(porMes).sort().forEach(m=>{
+          const [ano,mes]=m.split("-");
+          const nomesMes=["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+          const linha=document.createElement('div');linha.className='carro-item';
+          linha.innerText=`• ${nomesMes[parseInt(mes)-1]}/${ano} — ${porMes[m]} saída(s)`;
+          detalhe.appendChild(linha);
+        });
+        resumo.appendChild(detalhe);document.getElementById('lista').appendChild(resumo);
+      }
     }
-
-    function exportarExcel() {
-      const dados = carregarDados();
-      if (!dados.length) return toast("Nenhuma saída registrada.");
-
-      const wsData = [["Carro", "Placa", "Data"]];
-      dados.forEach(d => wsData.push([d.carro, d.placa, d.data]));
-
-      const ws = XLSX.utils.aoa_to_sheet(wsData);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Saídas");
-
-      XLSX.writeFile(wb, `${getChaveMesAtual()}.xlsx`);
-      toast("📊 Excel exportado!");
-    }
-
-    function formatarData(dataISO) {
-      const [ano, mes, dia] = dataISO.split("-");
-      return `${dia}/${mes}/${ano}`;
-    }
-
-    function toggleTheme() {
-      document.body.classList.toggle('light');
-    }
-
-    mostrarLista();
+    function gerarBackup(){const dados=carregarDados();const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`${getChaveMesAtual()}.json`;a.click();toast("💾 Backup gerado!");}
+    function restaurarBackup(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=e=>{try{const dados=JSON.parse(e.target.result);salvarDados(dados);toast("✅ Backup restaurado!");mostrarLista();}catch{toast("❌ Erro ao restaurar backup.");}};reader.readAsText(file);}
+    function exportarExcel(){const dados=carregarDados();if(!dados.length)return toast("Nenhuma saída.");const wsData=[["Carro","Placa","Data"]];dados.forEach(d=>wsData.push([d.carro,d.placa,d.data]));const ws=XLSX.utils.aoa_to_sheet(wsData);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Saídas");XLSX.writeFile(wb,`${getChaveMesAtual()}.xlsx`);toast("📊 Excel exportado!");}
+    function formatarData(dataISO){const [ano,mes,dia]=dataISO.split("-");return `${dia}/${mes}/${ano}`;}
+    function toggleTheme(){document.body.classList.toggle('light');}
+    function toast(msg){const t=document.getElementById("toast");t.innerText=msg;t.style.display="block";setTimeout(()=>t.style.display="none",3000);}
   </script>
 </body>
 </html>
